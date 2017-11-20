@@ -5,6 +5,13 @@
       - apache2
       - libapache2-mod-php5
 
+- name: Starting nginx
+  service: name=nginx state=started
+
+- name: Starting apache2 service
+  service: name=apache2 state=started
+
+
 - name: Copy config /etc/nginx/sites-available/default
   template: src=default  dest=/etc/nginx/sites-available/default
   notify:
@@ -14,9 +21,6 @@
   template: src=nginx.conf  dest=/etc/nginx/nginx.conf
   notify:
     - restart nginx
-
-- name: Starting nginx
-  service: name=nginx state=started
 
 - name: Copy config /etc/apache2/apache2.conf
   template: src=apache2.conf  dest=/etc/apache2/apache2.conf
@@ -32,6 +36,3 @@
   template: src=000-default.conf  dest=/etc/apache2/sites-available/000-default.conf
   notify:
     - restart apache2
-
-- name: Starting apache2 service
-  service: name=apache2 state=started
