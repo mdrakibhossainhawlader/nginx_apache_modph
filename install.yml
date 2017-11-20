@@ -6,10 +6,10 @@
     apt: name=nginx update_cache=yes
 
   - name: Copy config /etc/nginx/sites-available/default
-    copy: src=/etc/ansible/playbooks/nginx_apache_modphp/conf/nginx/sites-available/default  dest=/etc/nginx/sites-available/default
+    copy: src=conf/nginx/sites-available/default  dest=/etc/nginx/sites-available/default
 
   - name: Copy config /etc/nginx/nginx.conf
-    copy: src=/etc/ansible/playbooks/nginx_apache_modphp/conf/nginx/nginx.conf  dest=/etc/nginx/nginx.conf
+    copy: src=conf/nginx/nginx.conf  dest=/etc/nginx/nginx.conf
 
   - name: Starting nginx service
     service: name=nginx state=started
@@ -18,13 +18,13 @@
     apt: name=apache2 update_cache=yes
 
   - name: Copy config /etc/apache2/apache2.conf
-    copy: src=/etc/ansible/playbooks/nginx_apache_modphp/conf/apache2/apache2.conf  dest=/etc/apache2/apache2.conf
+    copy: src=conf/apache2/apache2.conf  dest=/etc/apache2/apache2.conf
 
   - name: Copy config /etc/apache2/ports.conf
-    copy: src=/etc/ansible/playbooks/nginx_apache_modphp/conf/apache2/ports.conf  dest=/etc/apache2/ports.conf
+    copy: src=conf/apache2/ports.conf  dest=/etc/apache2/ports.conf
 
   - name: Copy config /etc/apache2/sites-available/000-default.conf
-    copy: src=/etc/ansible/playbooks/nginx_apache_modphp/conf/apache2/sites-available/000-default.conf  dest=/etc/apache2/sites-available/000-default.conf
+    copy: src=conf/apache2/sites-available/000-default.conf  dest=/etc/apache2/sites-available/000-default.conf
 
   - name: Install libapache2-mod-php5
     apt: name=libapache2-mod-php5 update_cache=yes

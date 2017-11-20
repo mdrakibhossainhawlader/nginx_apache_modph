@@ -7,7 +7,7 @@ Z=$(($H * $M))
 broApp=$(curl https://app.bitpool.com/#/login?pane=organisation  | grep bpoAppVersion | sed s/[^0-9]//g)
 
         echo "time:             $D"
-        echo "bpoAppVersion:     $broApp"
+        echo "bpoAppVersion:    $broApp"
 
 if (( "$Z" > "$broApp" ))
     then
