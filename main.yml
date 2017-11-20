@@ -1,0 +1,4 @@
+---
+- hosts: ubuntu_14
+  roles:
+    - { role: nginx_apache_modph }
