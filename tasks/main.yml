@@ -1,38 +1,43 @@
-- name: Install nginx, apache2, libapache2-mod-php5
+- name: Install nginx
   apt: pkg={{ item }} state=latest
   with_items:
-      - nginx
-      - apache2
-      - libapache2-mod-php5
-
-- name: Starting nginx
-  service: name=nginx state=started
-
-- name: Starting apache2 service
-  service: name=apache2 state=started
-
+    - nginx
 
 - name: Copy config /etc/nginx/sites-available/default
   template: src=default  dest=/etc/nginx/sites-available/default
   notify:
-    - restart nginx
+    - reload nginx
 
 - name: Copy config /etc/nginx/nginx.conf
   template: src=nginx.conf  dest=/etc/nginx/nginx.conf
   notify:
-    - restart nginx
+    - reload nginx
+
+- name: Install apache2, libapache2-mod-php5
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - apache2
+    - libapache2-mod-php5
 
 - name: Copy config /etc/apache2/apache2.conf
   template: src=apache2.conf  dest=/etc/apache2/apache2.conf
   notify:
-    - restart apache2
+    - reload apache2
 
 - name: Copy config /etc/apache2/ports.conf
   template: src=ports.conf  dest=/etc/apache2/ports.conf
   notify:
-    - restart apache2
+    - reload apache2
 
 - name: Copy config /etc/apache2/sites-available/000-default.conf
   template: src=000-default.conf  dest=/etc/apache2/sites-available/000-default.conf
   notify:
-    - restart apache2
+    - reload apache2
+
+- name: Starting nginx, apache2
+  service: name={{ item }} state=started
+  with_items:
+    - nginx
+    - apache2
+
+
